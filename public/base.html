@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}Qurilka — форум{% endblock %}</title>
+
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="topbar">
+        <a href="/">Главная</a>
+        <a href="/rules/">Правила</a>
+        <a href="/help/">Помощь</a>
+    </div>
+
+    <header>
+        <div class="logo">
+            <a href="/">
+                <h1>Qurilka</h1>
+            </a>
+            <div class="slogan">Не вкурил? Спроси. Вкурил — объясни.</div>
+        </div>
+
+        <form class="header-search" action="#">
+            <input type="search" class="input" placeholder="Поиск">
+            <button type="submit" class="button">Найти</button>
+        </form>
+
+        {% if is_auth %}
+        <a href="/ask/" class="button">Задать вопрос</a>
+        <div class="header-user-information">
+            <img class="header-user-avatar" src="{% static 'img/avatar.png' %}" alt="avatar">
+            <div class="header-profile-options">
+                <a href="/profile/"><b>Пользователь</b></a>
+                <div class="user-status">прохожий</div>
+                <div>
+                    <a href="/profile/">настройки</a> |
+                    <a href="/login/">выход</a>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="header-user-information">
+            <a href="/login/">Вход</a> |
+            <a href="/signup/">Регистрация</a>
+        </div>
+        {% endif %}
+    </header>
+
+    <div class="page">
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+
+        <aside>
+            <h2>Популярные теги</h2>
+            <div class="tags">
+                <a href="/tag/sigarety/">сигареты</a>
+                <a href="/tag/perekur/">перекур</a>
+                <a href="/tag/zazhigalki/">зажигалки</a>
+                <a href="/tag/tabak/">табак</a>
+            </div>
+
+            <h2>Лучшие участники</h2>
+            <ul>
+                <li><a href="/">Иван Иванов</a></li>
+                <li><a href="/">Пётр Петров</a></li>
+                <li><a href="/">Мария Сидорова</a></li>
+            </ul>
+        </aside>
+    </div>
+
+    <footer>
+        Курилка &copy; 2026. Курение вредит вашему здоровью.
+    </footer>
+
+</body>
+</html>
