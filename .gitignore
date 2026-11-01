@@ -1,0 +1,45 @@
+# Python / Django
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+env/
+db.sqlite3
+*.sqlite3
+*.sqlite3-journal
+
+# Django: собранная статика и загружаемые файлы
+staticfiles/
+media/
+
+# Переменные окружения и секреты
+.env
+.env.*
+
+# Логи
+*.log
+npm-debug.log*
+
+# Зависимости и артефакты сборки
+node_modules/
+dist/
+build/
+*.egg-info/
+
+# Кеш и временные файлы
+.cache/
+.parcel-cache/
+.pytest_cache/
+*.tmp
+
+# macOS / Windows
+.DS_Store
+Thumbs.db
+
+# Редакторы и IDE
+.idea/
+.vscode/
+*.swp
+
+# Локальные инструменты
+serve.py
