@@ -1,0 +1,15 @@
+<aside>
+    <h2>Популярные теги</h2>
+    <ul>
+        {% for tag in popular_tags %}
+        <li><a href="{% url 'tag' tag %}">{{ tag }}</a></li>
+        {% endfor %}
+    </ul>
+
+    <h2>Лучшие участники</h2>
+    <ul>
+        {% for member in best_members %}
+        <li><a href="{% url 'index' %}">{{ member.name }}</a></li>
+        {% endfor %}
+    </ul>
+</aside>

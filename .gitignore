@@ -9,8 +9,8 @@ db.sqlite3
 *.sqlite3-journal
 
 # Django: собранная статика и загружаемые файлы
-staticfiles/
-media/
+/static/
+/media/
 
 # Переменные окружения и секреты
 .env

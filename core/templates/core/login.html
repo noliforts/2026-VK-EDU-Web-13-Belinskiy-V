@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Вход — Qurilka{% endblock %}
+
+{% block content %}
+<h2>Вход</h2>
+
+<div class="error">Неверный логин или пароль!</div>
+
+<form>
+    {% include 'includes/form_row.html' with label='Логин' id='login' placeholder='Введите ваш логин' %}
+    {% include 'includes/form_row.html' with label='Пароль' id='password' type='password' value='12345678' error='Проверьте пароль.' %}
+    <div class="form-row">
+        <label></label>
+        <div class="field"><a href="{% url 'index' %}" class="button">Войти</a></div>
+    </div>
+    <div class="form-row">
+        <label></label>
+        <div class="field"><a href="{% url 'signup' %}">Создать аккаунт</a></div>
+    </div>
+</form>
+{% endblock %}

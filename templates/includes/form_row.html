@@ -1,0 +1,12 @@
+<div class="form-row">
+    <label for="{{ id }}">{{ label }}</label>
+    <div class="field">
+        {% if rows %}
+        <textarea class="input{% if error %} invalid{% endif %}" id="{{ id }}" rows="{{ rows }}">{{ value }}</textarea>
+        {% else %}
+        <input type="{{ type|default:'text' }}" class="input{% if error %} invalid{% endif %}" id="{{ id }}"{% if value %} value="{{ value }}"{% endif %}{% if placeholder %} placeholder="{{ placeholder }}"{% endif %}>
+        {% endif %}
+        {% if error %}<div class="field-error">{{ error }}</div>{% endif %}
+        {% if hint %}<div class="hint">{{ hint }}</div>{% endif %}
+    </div>
+</div>
