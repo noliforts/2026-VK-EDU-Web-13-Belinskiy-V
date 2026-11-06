@@ -2,19 +2,19 @@ from django.shortcuts import render
 
 
 def index(request):
-    return render(request, 'index.html', {'is_auth': True})
+    return render(request, 'index.html')
 
 
 def question(request, question_id):
-    return render(request, 'question.html', {'is_auth': True})
+    return render(request, 'question.html')
 
 
 def ask(request):
-    return render(request, 'ask.html', {'is_auth': True})
+    return render(request, 'ask.html')
 
 
 def profile(request):
-    return render(request, 'profile.html', {'is_auth': True})
+    return render(request, 'profile.html')
 
 
 def login(request):

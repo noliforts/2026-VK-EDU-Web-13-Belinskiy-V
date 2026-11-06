@@ -58,11 +58,9 @@ header h1 { font-size: 28px; }
 
 .page { display: flex; flex: 1; gap: 20px; padding: 15px; background: var(--paper); }
 main { flex: 1; min-width: 0; } /* min-width: 0, иначе длинный текст растягивает страницу */
-aside { width: 220px; }
+aside { width: 220px; overflow-wrap: anywhere; }
 aside h2, main h2 { font-size: 15px; }
 h2 a { font-size: 11px; }
-.tags { margin-bottom: 15px; }
-.tags a { margin-right: 8px; }
 
 /* карточка вопроса/ответа: цветная полоска, дата, потом содержимое */
 .question { margin-bottom: 10px; border: 1px solid var(--border); background: #fff; }
@@ -73,10 +71,12 @@ h2 a { font-size: 11px; }
 .question-left { width: 70px; text-align: center; }
 .question-left img { width: 50px; height: 50px; }
 .question-left .rank { color: #777; font-size: 10px; }
-.question-body { flex: 1; min-width: 0; }
+.question-body { flex: 1; min-width: 0; overflow-wrap: anywhere; } /* длинная строка без пробелов переносится */
+.preview { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden; } /* в списке показываем максимум 3 строки текста */
 .question-body h3 { font-size: 14px; margin: 0 0 4px; }
-.rating { margin-top: 4px; font-size: 10px; }
-.rating a { text-decoration: none; font-weight: bold; }
+.rating { margin-top: 4px; font-size: 10px; white-space: nowrap; }
+/* отступы у лайка и дизлайка, чтобы легче попасть мышкой */
+.rating a { display: inline-block; padding: 4px 6px; font-size: 13px; text-decoration: none; font-weight: bold; }
 /* нажатый лайк или дизлайк */
 .rating a.active { color: var(--accent); }
 
