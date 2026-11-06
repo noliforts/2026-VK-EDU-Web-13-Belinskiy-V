@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Как это сделать? — Qurilka{% endblock %}
+
+{% block content %}
+<div class="question">
+    <div class="question-bar"></div>
+    <div class="question-date">04-Дек-07 18:04</div>
+    <div class="question-row">
+        <div class="question-left">
+            <img src="{% static 'img/avatar.png' %}" alt="avatar">
+            <div><b>Иван Иванов</b></div>
+            <div class="rank">прохожий</div>
+            <div class="rating">[ <a href="#" class="active">+</a> 5 <a href="#">−</a> ]</div>
+        </div>
+        <div class="question-body">
+            <h3>Как это сделать?</h3>
+            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+            ответов (2)
+            Теги: <a href="/">сигареты</a> <a href="/">перекур</a>
+        </div>
+    </div>
+</div>
+
+<div class="question">
+    <div class="question-bar"></div>
+    <div class="question-date">05-Дек-07 21:15</div>
+    <div class="question-row">
+        <div class="question-left">
+            <img src="{% static 'img/avatar.png' %}" alt="avatar">
+            <div><b>Пётр Петров</b></div>
+            <div class="rank">завсегдатай</div>
+            <div class="rating">[ <a href="#">+</a> 5 <a href="#" class="active">−</a> ]</div>
+        </div>
+        <div class="question-body">
+            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+            <label><input type="checkbox" checked> Верный ответ</label>
+        </div>
+    </div>
+</div>
+
+<div class="question">
+    <div class="question-bar"></div>
+    <div class="question-date">05-Дек-07 21:15</div>
+    <div class="question-row">
+        <div class="question-left">
+            <img src="{% static 'img/avatar.png' %}" alt="avatar">
+            <div><b>Мария Сидорова</b></div>
+            <div class="rank">дед курилки</div>
+            <div class="rating">[ <a href="#">+</a> 3 <a href="#">−</a> ]</div>
+        </div>
+        <div class="question-body">
+            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+            <label><input type="checkbox"> Верный ответ</label>
+        </div>
+    </div>
+</div>
+
+<div class="pages">
+    <span class="disabled">« назад</span>
+    Страницы ответов: <b>1</b> <a href="/">2</a> <a href="/">3</a>
+    <a href="/">вперёд »</a>
+</div>
+
+<form>
+    <textarea class="input" rows="5" placeholder="Введите ваш ответ"></textarea>
+    <div class="hint">Отвечайте по делу: не меньше 10 символов.</div>
+    <button type="submit" class="button">🚬 Ответить</button>
+</form>
+{% endblock %}

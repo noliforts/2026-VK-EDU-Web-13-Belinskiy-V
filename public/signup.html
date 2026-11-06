@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Регистрация — Qurilka{% endblock %}
+
+{% block content %}
+<h2>Регистрация</h2>
+
+<div class="error">Этот email уже зарегистрирован!</div>
+
+<form>
+    <div class="form-row">
+        <label for="login">Логин</label>
+        <div class="field">
+            <input type="text" class="input" id="login" value="ivanov">
+            <div class="hint">Только латиница и цифры.</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <label for="email">Email</label>
+        <div class="field">
+            <input type="email" class="input invalid" id="email" value="ivanov@mail.ru">
+            <div class="field-error">Этот email уже занят.</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <label for="nickname">Никнейм</label>
+        <div class="field">
+            <input type="text" class="input" id="nickname" value="Иван Иванов">
+            <div class="hint">Так вас увидят другие участники.</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <label for="password">Пароль</label>
+        <div class="field">
+            <input type="password" class="input" id="password" value="12345678">
+            <div class="hint">Не короче 8 символов.</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <label for="password2">Повторите пароль</label>
+        <div class="field">
+            <input type="password" class="input invalid" id="password2" value="1234567">
+            <div class="field-error">Пароли не совпадают.</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <label for="avatar">Аватар</label>
+        <div class="field">
+            <input type="file" class="input" id="avatar">
+            <div class="hint">PNG или JPG, до 2 МБ.</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <label></label>
+        <div class="field"><a href="/" class="button">Зарегистрироваться</a></div>
+    </div>
+</form>
+{% endblock %}

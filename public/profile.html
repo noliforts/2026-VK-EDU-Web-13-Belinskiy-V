@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Настройки — Qurilka{% endblock %}
+
+{% block content %}
+<h2>Настройки: Пользователь</h2>
+
+<div class="error">Не удалось сохранить настройки: исправьте ошибки в полях.</div>
+
+<form>
+    <div class="form-row">
+        <label for="login">Логин</label>
+        <div class="field">
+            <input type="text" class="input" id="login" value="ivanov">
+            <div class="hint">Только латиница и цифры.</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <label for="email">Email</label>
+        <div class="field">
+            <input type="email" class="input invalid" id="email" value="ivanov@mail">
+            <div class="field-error">Введите корректный email.</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <label for="nickname">Никнейм</label>
+        <div class="field">
+            <input type="text" class="input" id="nickname" value="Иван Иванов">
+            <div class="hint">Так вас увидят другие участники.</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <label for="avatar">Аватар</label>
+        <div class="field">
+            <img class="profile-avatar" src="{% static 'img/avatar.png' %}" alt="avatar">
+            <input type="file" class="input" id="avatar">
+            <div class="hint">PNG или JPG, до 2 МБ.</div>
+        </div>
+    </div>
+    <div class="form-row">
+        <label></label>
+        <div class="field"><button type="submit" class="button">Сохранить</button></div>
+    </div>
+</form>
+{% endblock %}
