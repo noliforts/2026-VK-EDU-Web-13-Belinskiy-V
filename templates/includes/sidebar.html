@@ -1,6 +1,6 @@
 <aside>
     <h2>Популярные теги</h2>
-    <ul>
+    <ul class="tags">
         {% for tag in popular_tags %}
         <li><a href="{% url 'tag' tag %}">{{ tag }}</a></li>
         {% endfor %}
