@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ question.title }} — Qurilka{% endblock %}
+
+{% block content %}
+{% include 'includes/question_card.html' with detail=True %}
+
+{% for answer in page %}
+    {% include 'includes/answer_card.html' %}
+{% endfor %}
+
+{% include 'includes/paginator.html' with label='Страницы ответов:' %}
+
+<form>
+    <textarea class="input" rows="5" placeholder="Введите ваш ответ"></textarea>
+    <div class="hint">Отвечайте по делу: не меньше 10 символов.</div>
+    <button type="submit" class="button">🚬 Ответить</button>
+</form>
+{% endblock %}

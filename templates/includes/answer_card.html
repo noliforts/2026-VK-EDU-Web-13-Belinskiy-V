@@ -1,0 +1,13 @@
+<div class="question">
+    <div class="question-bar"></div>
+    <div class="question-date">{{ answer.date }}</div>
+    <div class="question-row">
+        <div class="question-left">
+            {% include 'includes/author.html' with author=answer.author rating=answer.rating vote=answer.vote %}
+        </div>
+        <div class="question-body">
+            <p>{{ answer.text }}</p>
+            <label><input type="checkbox"{% if answer.correct %} checked{% endif %}> Верный ответ</label>
+        </div>
+    </div>
+</div>
