@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}Qurilka — форум{% endblock %}</title>
+
+    <link rel="icon" type="image/png" href="{% static 'core/img/favicon.png' %}">
+    <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+</head>
+<body>
+    {% include 'includes/header.html' %}
+
+    <div class="page">
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+
+        {% include 'includes/sidebar.html' %}
+    </div>
+
+    <footer>
+        Курилка &copy; 2026. Курение вредит вашему здоровью.
+    </footer>
+
+</body>
+</html>

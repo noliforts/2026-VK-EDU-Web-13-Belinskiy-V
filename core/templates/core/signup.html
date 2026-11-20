@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Регистрация — Qurilka{% endblock %}
+
+{% block content %}
+<h2>Регистрация</h2>
+
+<div class="error">Этот email уже зарегистрирован!</div>
+
+<form>
+    {% include 'includes/form_row.html' with label='Логин' id='login' value='ivanov' hint='Только латиница и цифры.' %}
+    {% include 'includes/form_row.html' with label='Email' id='email' type='email' value='ivanov@mail.ru' error='Этот email уже занят.' %}
+    {% include 'includes/form_row.html' with label='Никнейм' id='nickname' value='Иван Иванов' hint='Так вас увидят другие участники.' %}
+    {% include 'includes/form_row.html' with label='Пароль' id='password' type='password' value='12345678' hint='Не короче 8 символов.' %}
+    {% include 'includes/form_row.html' with label='Повторите пароль' id='password2' type='password' value='1234567' error='Пароли не совпадают.' %}
+    {% include 'includes/form_row.html' with label='Аватар' id='avatar' type='file' hint='PNG или JPG, до 2 МБ.' %}
+    <div class="form-row">
+        <label></label>
+        <div class="field"><a href="{% url 'index' %}" class="button">Зарегистрироваться</a></div>
+    </div>
+</form>
+{% endblock %}

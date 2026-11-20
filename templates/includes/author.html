@@ -1,0 +1,5 @@
+{% load static %}
+<img src="{% static 'core/img/avatar.png' %}" alt="avatar">
+<div><b>{{ author.name }}</b></div>
+<div class="rank">{{ author.rank }}</div>
+{% include 'includes/rating.html' %}
