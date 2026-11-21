@@ -1,34 +1,37 @@
-from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 
 from core.utils import paginate
 
-from .mock import ANSWERS, QUESTIONS
+from .models import Question, Tag
 
 
 def index(request):
-    page = paginate(QUESTIONS, request, per_page=5)
+    questions = Question.objects.new()
+    page = paginate(questions, request, per_page=10)
     return render(request, 'questions/index.html', {'page': page})
 
 
 def hot(request):
-    hot_questions = sorted(QUESTIONS, key=lambda q: q['rating'], reverse=True)
-    page = paginate(hot_questions, request, per_page=5)
+    questions = Question.objects.hot()
+    page = paginate(questions, request, per_page=10)
     return render(request, 'questions/hot.html', {'page': page})
 
 
 def tag(request, tag):
-    tag_questions = [q for q in QUESTIONS if tag in q['tags']]
-    page = paginate(tag_questions, request, per_page=5)
-    return render(request, 'questions/tag.html', {'page': page, 'tag': tag})
+    tag_obj = get_object_or_404(Tag, name=tag)
+    questions = Question.objects.by_tag(tag_obj.name)
+    page = paginate(questions, request, per_page=10)
+    return render(request, 'questions/tag.html', {'page': page, 'tag': tag_obj.name})
 
 
 def question(request, question_id):
-    if not 1 <= question_id <= len(QUESTIONS):
-        raise Http404
-    question = QUESTIONS[question_id - 1]
-    page = paginate(ANSWERS, request, per_page=3)
-    return render(request, 'questions/question.html', {'question': question, 'page': page})
+    question_item = get_object_or_404(
+        Question.objects.select_related('author', 'author__profile'),
+        pk=question_id,
+    )
+    answers = question_item.answers.select_related('author', 'author__profile').order_by('-created_at')
+    page = paginate(answers, request, per_page=5)
+    return render(request, 'questions/question.html', {'question': question_item, 'page': page})
 
 
 def ask(request):

@@ -18,7 +18,7 @@
             <div class="question-tags">
                 <span>Теги:</span>
                 <ul class="tags">
-                    {% for tag in question.tags %}
+                    {% for tag in question.tags.all %}
                     <li><a href="{% url 'tag' tag %}">{{ tag }}</a></li>
                     {% endfor %}
                 </ul>

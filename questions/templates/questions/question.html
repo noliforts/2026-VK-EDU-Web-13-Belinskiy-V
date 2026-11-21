@@ -7,6 +7,8 @@
 
 {% for answer in page %}
     {% include 'includes/answer_card.html' %}
+{% empty %}
+    <p>Пока нет ни одного ответа к этому вопросу.</p>
 {% endfor %}
 
 {% include 'includes/paginator.html' with label='Страницы ответов:' %}
