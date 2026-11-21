@@ -21,17 +21,18 @@
     {% if user.is_authenticated %}
     <a href="{% url 'ask' %}" class="button">Задать вопрос</a>
     <div class="header-user-information">
-        <img class="header-user-avatar" src="{% static 'core/img/avatar.png' %}" alt="avatar">
+        <img class="header-user-avatar" src="{% if user.profile.avatar %}{{ user.profile.avatar.url }}{% else %}{% static 'core/img/avatar.png' %}{% endif %}" alt="avatar">
         <div class="header-profile-options">
             <a href="{% url 'profile' %}"><b>{{ user.username }}</b></a>
-            <div class="user-status">прохожий</div>
+            <div class="user-status">{{ user.profile.rank|default:'прохожий' }}</div>
             <div>
                 <a href="{% url 'profile' %}">настройки</a> |
-                <a href="{% url 'login' %}">выход</a>
+                <a href="{% url 'logout' %}">выход</a>
             </div>
         </div>
     </div>
     {% else %}
+    <a href="{% url 'login' %}?next={% url 'ask' %}" class="button disabled" title="Войдите, чтобы задать вопрос">Задать вопрос</a>
     <div class="header-user-information">
         <a href="{% url 'login' %}">Вход</a> |
         <a href="{% url 'signup' %}">Регистрация</a>

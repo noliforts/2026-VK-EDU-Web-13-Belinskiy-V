@@ -7,13 +7,29 @@
 
 {% for answer in page %}
     {% include 'includes/answer_card.html' %}
+{% empty %}
+    <p>Пока нет ни одного ответа к этому вопросу.</p>
 {% endfor %}
 
 {% include 'includes/paginator.html' with label='Страницы ответов:' %}
 
-<form>
-    <textarea class="input" rows="5" placeholder="Введите ваш ответ"></textarea>
-    <div class="hint">Отвечайте по делу: не меньше 10 символов.</div>
+<form method="post" action="{% url 'question' question.id %}">
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+    <div class="error">{{ form.non_field_errors.0 }}</div>
+    {% endif %}
+    {% if form.text.errors %}
+    <div class="field-error">{{ form.text.errors.0 }}</div>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+    <textarea name="text" class="input{% if form.text.errors %} invalid{% endif %}" rows="5" placeholder="Введите ваш ответ">{{ form.text.value|default:'' }}</textarea>
+    <div class="hint">Отвечайте по делу: не меньше 5 символов.</div>
     <button type="submit" class="button">🚬 Ответить</button>
+    {% else %}
+    <textarea class="input" rows="5" placeholder="Войдите на сайт, чтобы оставить ответ" disabled></textarea>
+    <div class="hint">Отвечать могут только авторизованные пользователи.</div>
+    <a href="{% url 'login' %}?next={% url 'question' question.id %}" class="button disabled" title="Войдите, чтобы ответить">Войти и ответить</a>
+    {% endif %}
 </form>
 {% endblock %}

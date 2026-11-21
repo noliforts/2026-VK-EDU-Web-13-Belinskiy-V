@@ -5,10 +5,15 @@
 {% block content %}
 <h2>Новый вопрос</h2>
 
-<form>
-    {% include 'includes/form_row.html' with label='Заголовок' id='title' value='Как это сделать?' hint='Коротко и по делу, до 100 символов.' %}
-    {% include 'includes/form_row.html' with label='Текст' id='text' rows=15 value='Lorem ipsum dolor sit amet, consectetuer adipiscing elit.' hint='Опишите проблему подробно.' %}
-    {% include 'includes/form_row.html' with label='Теги' id='tags' value='сигареты, перекур, табак, зажигалки, дым, пепел' error='Не больше 5 тегов.' hint='Теги через запятую.' %}
+{% if form.non_field_errors %}
+<div class="error">{{ form.non_field_errors.0 }}</div>
+{% endif %}
+
+<form method="post" action="{% url 'ask' %}">
+    {% csrf_token %}
+    {% include 'includes/form_row.html' with label='Заголовок' id='title' value=form.title.value|default:'' error=form.title.errors.0 placeholder='Как это сделать?' hint='Коротко и по делу, до 100 символов.' %}
+    {% include 'includes/form_row.html' with label='Текст' id='text' rows=10 value=form.text.value|default:'' error=form.text.errors.0 placeholder='Опишите проблему подробно.' hint='Опишите проблему подробно.' %}
+    {% include 'includes/form_row.html' with label='Теги' id='tags' value=form.tags.value|default:'' error=form.tags.errors.0 placeholder='табак, зажигалки' hint='Теги через запятую, не больше 5.' %}
     <div class="form-row">
         <label></label>
         <div class="field"><button type="submit" class="button">Спросить</button></div>

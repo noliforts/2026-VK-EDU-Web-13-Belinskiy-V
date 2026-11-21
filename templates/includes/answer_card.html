@@ -1,13 +1,20 @@
-<div class="question">
+<div class="question" id="answer-{{ answer.id }}">
     <div class="question-bar"></div>
     <div class="question-date">{{ answer.date }}</div>
     <div class="question-row">
         <div class="question-left">
-            {% include 'includes/author.html' with author=answer.author rating=answer.rating vote=answer.vote %}
+            {% include 'includes/author.html' with author=answer.author rating=answer.rating vote=answer.vote target='answer' item_id=answer.id %}
         </div>
         <div class="question-body">
             <p>{{ answer.text }}</p>
-            <label><input type="checkbox"{% if answer.correct %} checked{% endif %}> Верный ответ</label>
+            {% if user == question.author %}
+            <label>
+                <input type="checkbox" class="correct-answer-checkbox" data-question-id="{{ question.id }}" data-answer-id="{{ answer.id }}"{% if answer.correct %} checked{% endif %}>
+                Верный ответ
+            </label>
+            {% elif answer.correct %}
+            <div><b>✓ Верный ответ</b></div>
+            {% endif %}
         </div>
     </div>
 </div>

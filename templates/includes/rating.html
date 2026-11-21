@@ -1,7 +1,13 @@
-<div class="rating">
+<div class="rating" data-target="{{ target|default:'question' }}" data-id="{{ item_id }}">
     [
-    <a href="#" {% if vote == 'up' %}class="active"{% endif %}>+</a>
-    {{ rating }}
-    <a href="#" {% if vote == 'down' %}class="active"{% endif %}>−</a>
+    {% if user.is_authenticated %}
+    <a href="#" class="vote-btn {% if vote == 'up' %}active{% endif %}" data-vote="like">+</a>
+    <span class="rating-value">{{ rating }}</span>
+    <a href="#" class="vote-btn {% if vote == 'down' %}active{% endif %}" data-vote="dislike">−</a>
+    {% else %}
+    <span class="vote-disabled" title="Войдите, чтобы проголосовать">+</span>
+    <span class="rating-value">{{ rating }}</span>
+    <span class="vote-disabled" title="Войдите, чтобы проголосовать">−</span>
+    {% endif %}
     ]
 </div>
