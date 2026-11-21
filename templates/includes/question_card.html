@@ -3,7 +3,7 @@
     <div class="question-date">{{ question.date }}</div>
     <div class="question-row">
         <div class="question-left">
-            {% include 'includes/author.html' with author=question.author rating=question.rating vote=question.vote %}
+            {% include 'includes/author.html' with author=question.author rating=question.rating vote=question.vote target='question' item_id=question.id %}
         </div>
         <div class="question-body">
             {% if detail %}

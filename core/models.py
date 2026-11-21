@@ -1,7 +1,15 @@
+import os
+import uuid
+
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+
+
+def avatar_upload_path(instance, filename):
+    ext = os.path.splitext(filename)[1].lower()
+    return f'avatars/{uuid.uuid4().hex}{ext}'
 
 
 class Profile(models.Model):
@@ -12,7 +20,7 @@ class Profile(models.Model):
         verbose_name='Пользователь',
     )
     avatar = models.ImageField(
-        upload_to='avatars/',
+        upload_to=avatar_upload_path,
         default='core/img/avatar.png',
         blank=True,
         verbose_name='Аватар',
@@ -36,7 +44,6 @@ class Profile(models.Model):
         return self.user.username
 
 
-# Для прозрачной совместимости с существующими шаблонами (author.name / author.rank)
 User.add_to_class('name', property(lambda u: u.username))
 User.add_to_class('rank', property(lambda u: u.profile.rank if hasattr(u, 'profile') else 'прохожий'))
 

@@ -5,14 +5,20 @@
 {% block content %}
 <h2>Вход</h2>
 
-<div class="error">Неверный логин или пароль!</div>
+{% if form.non_field_errors %}
+<div class="error">{{ form.non_field_errors.0 }}</div>
+{% endif %}
 
-<form>
-    {% include 'includes/form_row.html' with label='Логин' id='login' placeholder='Введите ваш логин' %}
-    {% include 'includes/form_row.html' with label='Пароль' id='password' type='password' value='12345678' error='Проверьте пароль.' %}
+<form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    {% if next %}
+    <input type="hidden" name="next" value="{{ next }}">
+    {% endif %}
+    {% include 'includes/form_row.html' with label='Логин' id='username' value=form.username.value|default:'' placeholder='Введите ваш логин' error=form.username.errors.0 %}
+    {% include 'includes/form_row.html' with label='Пароль' id='password' type='password' placeholder='Введите ваш пароль' error=form.password.errors.0 %}
     <div class="form-row">
         <label></label>
-        <div class="field"><a href="{% url 'index' %}" class="button">Войти</a></div>
+        <div class="field"><button type="submit" class="button">Войти</button></div>
     </div>
     <div class="form-row">
         <label></label>

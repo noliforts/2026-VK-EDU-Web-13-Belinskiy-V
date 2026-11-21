@@ -4,19 +4,29 @@
 {% block title %}Настройки — Qurilka{% endblock %}
 
 {% block content %}
-<h2>Настройки: {{ user.username|default:'Пользователь' }}</h2>
+<h2>Настройки: {{ user.username }}</h2>
 
-<div class="error">Не удалось сохранить настройки: исправьте ошибки в полях.</div>
+{% if form.non_field_errors %}
+<div class="error">{{ form.non_field_errors.0 }}</div>
+{% endif %}
 
-<form>
-    {% include 'includes/form_row.html' with label='Логин' id='login' value='ivanov' hint='Только латиница и цифры.' %}
-    {% include 'includes/form_row.html' with label='Email' id='email' type='email' value='ivanov@mail' error='Введите корректный email.' %}
-    {% include 'includes/form_row.html' with label='Никнейм' id='nickname' value='Иван Иванов' hint='Так вас увидят другие участники.' %}
+<form method="post" action="{% url 'profile' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-row">
+        <label for="username">Логин</label>
+        <div class="field">
+            <input type="text" class="input" id="username" value="{{ user.username }}" disabled>
+            <div class="hint">Логин изменить нельзя.</div>
+        </div>
+    </div>
+    {% include 'includes/form_row.html' with label='Email' id='email' type='email' value=form.email.value|default:user.email error=form.email.errors.0 %}
+    {% include 'includes/form_row.html' with label='Никнейм' id='nickname' value=form.nickname.value|default:user.profile.rank error=form.nickname.errors.0 hint='Так вас увидят другие участники.' %}
     <div class="form-row">
         <label for="avatar">Аватар</label>
         <div class="field">
-            <img class="profile-avatar" src="{% static 'core/img/avatar.png' %}" alt="avatar">
-            <input type="file" class="input" id="avatar">
+            <img class="profile-avatar" src="{% if user.profile.avatar %}{{ user.profile.avatar.url }}{% else %}{% static 'core/img/avatar.png' %}{% endif %}" alt="avatar">
+            <input name="avatar" type="file" class="input{% if form.avatar.errors %} invalid{% endif %}" id="avatar">
+            {% if form.avatar.errors %}<div class="field-error">{{ form.avatar.errors.0 }}</div>{% endif %}
             <div class="hint">PNG или JPG, до 2 МБ.</div>
         </div>
     </div>

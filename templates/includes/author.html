@@ -2,4 +2,4 @@
 <img src="{% if author.profile.avatar %}{{ author.profile.avatar.url }}{% else %}{% static 'core/img/avatar.png' %}{% endif %}" alt="avatar">
 <div><b>{{ author.name }}</b></div>
 <div class="rank">{{ author.rank }}</div>
-{% include 'includes/rating.html' %}
+{% include 'includes/rating.html' with target=target item_id=item_id rating=rating vote=vote %}
